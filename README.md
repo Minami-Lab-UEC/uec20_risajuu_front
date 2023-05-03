@@ -5,4 +5,7 @@
 ```bash
 $ docker-compose up -d
 $ docker-compose exec app_front bash
+$ npm i
+$ npm run dev
 ```
+localhost:3000にアクセス

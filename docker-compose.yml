@@ -6,10 +6,10 @@ services:
       context: ./docker
       dockerfile: Dockerfile
     container_name: front
-    working_dir: '/root/risajuu'
+    working_dir: '/root/risajuu-app'
     tty: true
     volumes:
-      - ./risajuu-app:/root/risajuu
+      - ./risajuu-app:/root/risajuu-app
     # runtime: nvidia
     # deploy:
     #   resources:

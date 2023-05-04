@@ -4,6 +4,7 @@
 ## 起動方法
 ### ローカル環境の場合
 ```
+$ npm i
 $ npm run dev
 ```
 localhost:3000にアクセス

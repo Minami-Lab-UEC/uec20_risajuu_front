@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'risajuu-app',
+    title: 'nuxt_live2d_sample',
     htmlAttrs: {
       lang: 'en'
     },
@@ -16,6 +16,11 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+      {
+        src: 'live2dcubismcore.js'
+      }
     ]
   },
 
@@ -42,5 +47,8 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-  }
+    babel: {
+      compact: false,
+    },
+  },
 }

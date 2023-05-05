@@ -25,7 +25,7 @@ export default defineComponent({
       this.messageList.push(this.message);
       axios.post('http://localhost:8080/api/v1/chat', {
         text: this.message,
-        // emotionAnalysis: true
+        emotion: true
       })
       .then((response: any) => {
         console.log(response)

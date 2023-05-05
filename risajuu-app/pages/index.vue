@@ -1,13 +1,40 @@
 <template>
-  <div>
-    <button id="test">テスト送信</button>
+  <div id="app">
+    <div v-for="i in messageList" :key="i">
+      <div>{{ i }}</div>
+    </div>
+    <input type="text" v-model="message" />
+    <button id="test" @click="sendMessage">送信</button>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import { defineComponent } from 'vue'
+import axios from 'axios'
 
-export default Vue.extend({})
+export default defineComponent({
+  data() {
+    return {
+      message: '',
+      messageList: [''],
+    }
+  },
+  methods: {
+    sendMessage() {
+      alert(this.message)
+      this.messageList.push(this.message);
+      // axios.post('/api/messages', {
+      //   message: this.message
+      // })
+      // .then((response: any) => {
+      //   console.log(response)
+      // })
+      // .catch((error: any) => {
+      //   console.log(error)
+      // })
+    }
+  }
+})
 </script>
 
 <style>

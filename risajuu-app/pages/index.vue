@@ -23,15 +23,17 @@ export default defineComponent({
     sendMessage() {
       alert(this.message)
       this.messageList.push(this.message);
-      // axios.post('/api/messages', {
-      //   message: this.message
-      // })
-      // .then((response: any) => {
-      //   console.log(response)
-      // })
-      // .catch((error: any) => {
-      //   console.log(error)
-      // })
+      axios.post('http://localhost:8080/api/v1/chat', {
+        text: this.message,
+        // emotionAnalysis: true
+      })
+      .then((response: any) => {
+        console.log(response)
+        this.messageList.push(response.data.response);
+      })
+      .catch((error: any) => {
+        console.log(error)
+      })
     }
   }
 })

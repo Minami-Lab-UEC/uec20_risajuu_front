@@ -4,7 +4,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'nuxt_live2d_sample',
+    title: 'live2dapp',
     htmlAttrs: {
       lang: 'en'
     },
@@ -20,6 +20,9 @@ export default {
     script: [
       {
         src: 'live2dcubismcore.js'
+      },
+      {
+        src: 'bundle.js'
       }
     ]
   },

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Live2d />
     <button id="test">テスト送信</button>
   </div>
 </template>

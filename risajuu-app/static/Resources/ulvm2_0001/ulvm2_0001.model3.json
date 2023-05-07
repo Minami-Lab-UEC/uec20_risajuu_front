@@ -14,7 +14,8 @@
     "Expressions": [
       {
         "Name": "angry",
-        "File": "exp/angry.exp3.json"
+        "File": "exp/angry.exp3.json",
+        "Sound": "sounds/audio.wav"
       },
       {
         "Name": "angry2",
@@ -163,7 +164,7 @@
     {
       "Target": "Parameter",
       "Name": "LipSync",
-      "Ids": []
+      "Ids": ["ParamMouthOpenY"]
     }
   ]
 }

@@ -34,19 +34,9 @@ export default defineComponent({
           text: this.message,
           emotion: true,
           voicevox: true,
-        },{
-          // responseType: 'arraybuffer' // レスポンスのデータタイプを指定する
         })
         .then((response: any) => {
           console.log("レスポンス", response.data);
-          //this.messageList.push(response.data.response);
-          // const jsonBlob = new Blob([response.data[0]], { type: 'application/json' });
-          // const blob = new Blob([response.data], { type: 'audio/wav' });
-
-          // // BlobオブジェクトをURLに変換して、音声を再生する
-          // const url = URL.createObjectURL(blob);
-          // const audio = new Audio(url);
-          // audio.play();
 
           const audioData = response.data.file
           const decodedAudioData = atob(audioData)
@@ -61,21 +51,10 @@ export default defineComponent({
           audio.play()
 
           // レスポンスJSONデータを取得する
-          // const responseData = response.headers;
-          // console.log(responseData);
           console.log("レスポンス", response.data.data);
   
-          // document.getElementById("emotionButton")?.click(); // 疑似的に隠されている感情を変更するボタンを押す
+          document.getElementById("emotionButton")?.click(); // 疑似的に隠されている感情を変更するボタンを押す
         })
-        // .then(response => response.formData())
-        // .then(formData => {
-        //   const jsonFile = formData.get('json_file');
-        //   const wavFile = formData.get('wav_file');
-        //   document.getElementById("emotionButton")?.click(); // 疑似的に隠されている感情を変更するボタンを押す
-
-        //   console.log(jsonFile);
-        //   console.log(wavFile);
-        // });
         .catch((error: any) => {
           console.log(error);
         });

@@ -50,9 +50,19 @@ export default defineComponent({
           const audio = new Audio(audioUrl)
           audio.play()
 
+          const fs = require('fs')
+          // 書き出すファイル名を指定する
+          const fileName = 'audio.wav'
+
+          // バイナリデータを書き出す
+          fs.writeFile(fileName, view, 'binary', function (err: any) {
+            if (err) throw err
+            console.log('ファイルが保存されました:', fileName)
+          })
+
           // レスポンスJSONデータを取得する
           console.log("レスポンス", response.data.data);
-  
+
           document.getElementById("emotionButton")?.click(); // 疑似的に隠されている感情を変更するボタンを押す
         })
         .catch((error: any) => {

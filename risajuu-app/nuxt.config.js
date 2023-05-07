@@ -53,5 +53,11 @@ export default {
     babel: {
       compact: false,
     },
+    extend(config, { isDev, isClient }) {
+      // ...
+      config.node = {
+        fs: 'empty'
+      }
+    }
   },
 }

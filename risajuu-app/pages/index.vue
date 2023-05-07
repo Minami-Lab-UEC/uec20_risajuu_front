@@ -9,7 +9,7 @@
     <div>
       <input id="emotion" type="text" value="Joy" />
       <input id="emotionStrength" type="text" value="0.65" />
-      <button id="emotionButton"></button>
+      <button id="emotionButton">hide</button>
     </div>
   </div>
 </template>

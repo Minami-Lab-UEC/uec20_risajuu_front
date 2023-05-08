@@ -10306,6 +10306,7 @@ var LAppLive2DManager = (function () {
     LAppLive2DManager.prototype.changeEmotion = function () {
         var _this = this;
         var getbtn = document.getElementById("emotionButton");
+        var test = document.getElementById("objecturl");
         getbtn.addEventListener("click", function () {
             console.log("click");
             var emotion = document.getElementById("emotion");

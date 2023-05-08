@@ -9,6 +9,7 @@
     <div>
       <input id="emotion" type="text" value="Joy" />
       <input id="emotionStrength" type="text" value="0.65" />
+      <input id="objecturl" type="text" value="" />
       <button id="emotionButton"></button>
     </div>
   </div>
@@ -48,19 +49,86 @@ export default defineComponent({
           const blob = new Blob([arrayBuffer], { type: 'audio/wav' })
           const audioUrl = URL.createObjectURL(blob)
           const audio = new Audio(audioUrl)
-          audio.play()
+          console.log("audio : ", audioUrl)
 
-          const fs = require('fs')
-          // 書き出すファイル名を指定する
-          const fileName = 'audio.wav'
+          axios.get(audioUrl, { responseType: 'blob' })
+                .then(response => {
+                  const audio = new Audio();
+                  audio.src = URL.createObjectURL(response.data);
+                  const audioCtx = new AudioContext()
+                  const source = audioCtx.createMediaElementSource(audio)
+                  const analyser = audioCtx.createAnalyser()
+                  source.connect(analyser)
+                  analyser.connect(audioCtx.destination)
+                  analyser.fftSize = 256
+                  const bufferLength = analyser.frequencyBinCount
+                  const dataArray = new Uint8Array(bufferLength)
+
+                  let drawInterval: any;
+
+                  audio.addEventListener('play', () => {
+                    drawInterval = setInterval(() => {
+                      analyser.getByteFrequencyData(dataArray)
+                      const sum = dataArray.reduce((a, b) => a + b)
+                      const average = sum / bufferLength
+                      console.log(average)
+                    }, 16)
+                  })
+                  audio.addEventListener('pause', () => {
+                      clearInterval(drawInterval)
+                  })
+                  audio.play()
+                })
+                .catch(error => console.error(error));
+
+          // web audio apiを使って現在再生しているwavファイルの音量をaudio.plya()をしている間consoleに表示する
+          // const audioCtx = new AudioContext()
+          // const source = audioCtx.createMediaElementSource(audio)
+          // const analyser = audioCtx.createAnalyser()
+          // source.connect(analyser)
+          // analyser.connect(audioCtx.destination)
+          // analyser.fftSize = 256
+          // const bufferLength = analyser.frequencyBinCount
+          // const dataArray = new Uint8Array(bufferLength)
+
+          // let drawInterval
+
+          // audio.addEventListener('play', () => {
+          //   drawInterval = setInterval(() => {
+          //     analyser.getByteFrequencyData(dataArray)
+          //     const sum = dataArray.reduce((a, b) => a + b)
+          //     const average = sum / bufferLength
+          //     console.log(average)
+          //   }, 16)
+          // })
+
+          // audio.addEventListener('pause', () => {
+          //   clearInterval(drawInterval)
+          // })
+
+          // audio.play()
+          // const draw = () => {
+          //   requestAnimationFrame(draw)
+          //   analyser.getByteFrequencyData(dataArray)
+          //   const sum = dataArray.reduce((a, b) => a + b)
+          //   const average = sum / bufferLength
+          //   console.log(average)
+          // }
+          // draw()
+          // audio.play()
+
+          // const fs = require('fs')
+          // // 書き出すファイル名を指定する
+          // const fileName = 'audio.wav'
 
           // バイナリデータを書き出す
-          fs.writeFile(fileName, view, 'binary', function (err: any) {
-            if (err) throw err
-            console.log('ファイルが保存されました:', fileName)
-          })
+          // fs.writeFile(fileName, view, 'binary', function (err: any) {
+          //   if (err) throw err
+          //   console.log('ファイルが保存されました:', fileName)
+          // })
 
           // レスポンスJSONデータを取得する
+          console.log("audioUrl : ", audioUrl)
           console.log("レスポンス", response.data.data);
 
           document.getElementById("emotionButton")?.click(); // 疑似的に隠されている感情を変更するボタンを押す

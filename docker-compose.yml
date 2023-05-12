@@ -18,5 +18,5 @@ services:
     #         - driver: nvidia
     #           capabilities: [ gpu ]
     ports: 
-      - "8000:3000"
+      - "3000:3000"
     # command: --port 3000

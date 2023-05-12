@@ -23,7 +23,7 @@ export default {
       },
       {
         src: 'bundle.js'
-      }
+      },
     ]
   },
 
